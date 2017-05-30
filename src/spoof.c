@@ -1,3 +1,17 @@
+/**
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
 
 #include <stdio.h>
 #include <errno.h>
@@ -101,7 +115,7 @@ static uint16_t ipv4_checksum(struct iphdr *ip_hdr)
 	uint64_t sum = 0;
 	uint16_t *data = (uint16_t *)ip_hdr;
 
-	int i;
+	unsigned int i;
 	for(i=0; i<sizeof(ip_hdr)/2; i++)
 		sum += data[i];
 
@@ -125,7 +139,7 @@ static void ps4_spoof_respond(struct sockaddr_in client_addr, const char *ps4_ho
 	size_t payload_max_len = sizeof(data) - (sizeof(struct iphdr) + sizeof(struct udphdr));
 
 	int payload_len = snprintf(payload, payload_max_len, awake_response, ps4_host_id);
-	if(payload_len >= payload_max_len)
+	if(payload_len >= (int)payload_max_len)
 	{
 		close(sockfd);
 		return;

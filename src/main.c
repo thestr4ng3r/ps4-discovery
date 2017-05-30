@@ -1,6 +1,19 @@
+/**
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
 
 #include <stdlib.h>
-#include <arpa/inet.h>
 #include <argp.h>
 #include <memory.h>
 
@@ -8,8 +21,6 @@
 #include "cmd_discover.h"
 
 #include "common.h"
-#include "discover.h"
-#include "spoof.h"
 
 static char doc[] = "An open source implementation of the PS4 Discovery protocol."
 		"\v"
@@ -40,7 +51,7 @@ static int parse_opt(int key, char *arg, struct argp_state *state)
 	return 0;
 }
 
-static struct argp argp = { options, parse_opt, "[<cmd> [CMD-OPTION...]]", doc };
+static struct argp argp = { options, parse_opt, "[<cmd> [CMD-OPTION...]]", doc, 0, 0, 0 };
 
 static void cleanup()
 {
